@@ -1,0 +1,7 @@
+gmail:
+  username: 'your gmail'
+  password: 'your gmail password'
+
+ducksboard:
+  api_key: 'your api key'
+  password: 'your password'
