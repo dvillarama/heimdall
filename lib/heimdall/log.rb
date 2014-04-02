@@ -7,7 +7,7 @@ module Heimdall
     end
 
     def self.logfile
-      ::File.expand_path(::File.join(::File.dirname(__FILE__), '..', '..', 'log', 'heimall.log'))
+      ::File.expand_path(::File.join(::File.dirname(__FILE__), '..', '..', 'log', 'heimdall.log'))
     end
 
     def self.logger
