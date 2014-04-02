@@ -1,6 +1,6 @@
 # Heimdall
 
-TODO: Write a gem description
+An unobtrusive monitor using papertrail to gmail to ducksboard
 
 ## Installation
 
@@ -18,7 +18,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Start heimdall as a daemon
+
+    ruby bin/run_heimdall.rb
+
+Stop heimdall daemon
+
+    ruby bin/run_heimdall.rb -k
 
 ## Contributing
 

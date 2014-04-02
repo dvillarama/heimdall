@@ -14,7 +14,9 @@ module Heimdall
 
     def self.validate
       rules.each do |rule|
-        p "#{rule.name} #{rule.valid?}"
+        rule.validate!
+        p "Rule: #{rule.name} is #{rule.match_error ? 'not valid' : 'valid'}"
+        p "   -> #{rule.match_error}" if rule.match_error
       end
     end
 

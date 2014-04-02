@@ -2,7 +2,7 @@ require 'Date'
 
 module Heimdall
   class Rule
-    attr_accessor :name
+    attr_accessor :name, :match_error
 
     def initialize(name)
       @name = name
@@ -28,8 +28,16 @@ module Heimdall
       @regex = Regexp.new regex
     end
 
-    def valid?
-      parse(@sample) == @sample_result
+    def validate!
+      matches = @regex.match @sample
+
+      unless matches
+        self.match_error = "Regex did not match #{@sample_result}"
+        return
+      end
+
+      data = Hash[matches.names.zip matches.captures]
+      self.match_error = "#{data} does not match #{@sample_result}" if data != @sample_result
     end
 
     def post log

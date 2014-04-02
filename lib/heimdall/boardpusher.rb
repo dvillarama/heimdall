@@ -9,7 +9,7 @@ module Heimdall
     def self.request(address, payload = {}, method = :post)
       payload = payload.to_json unless payload.empty?
       result = HTTParty.__send__ method, address, :basic_auth => auth, :body => payload
-      puts "#{payload} => #{JSON.parse result.body}"
+      Log.logger.info "#{method} #{payload} to #{address} resulting in #{JSON.parse result.body}"
     end
 
     def self.auth

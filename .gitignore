@@ -8,6 +8,7 @@ InstalledFiles
 _yardoc
 coverage
 doc/
+log/
 config/settings.yml
 lib/bundler/man
 pkg
