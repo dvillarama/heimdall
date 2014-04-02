@@ -1,4 +1,4 @@
-require 'Date'
+require 'date'
 
 module Heimdall
   class Rule
