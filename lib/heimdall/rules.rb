@@ -23,7 +23,7 @@ module Heimdall
     def self.process(data_logs)
       data_logs.each do |log|
         rules.each do |rule|
-          rule.post log
+          rule.submit log
         end
       end
     end

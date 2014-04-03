@@ -20,8 +20,8 @@ module Heimdall
     end
 
     def timestampify! data
-      date = data['timestamp']
-      data['timestamp'] = DateTime.parse(date).to_time.to_i if date
+      date = data['measure_time']
+      data['measure_time'] = DateTime.parse(date).to_time.to_i if date
     end
 
     def regex(regex)
@@ -40,9 +40,10 @@ module Heimdall
       self.match_error = "#{data} does not match #{@sample_result}" if data != @sample_result
     end
 
-    def post log
+    def submit log
       data = parse log
-      BoardPusher.request @url, data if data
+      return unless data
+      BoardPusher.submit @metric_name => data.merge(:type => @type)
     end
 
     def self.setter(*method_names)
@@ -53,6 +54,6 @@ module Heimdall
       end
     end
 
-    setter :sample, :sample_result, :url
+    setter :sample, :sample_result, :metric_name, :type
   end
 end

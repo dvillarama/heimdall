@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 2.14.1"
   spec.add_development_dependency "pry"
   spec.add_dependency "dante"
-  spec.add_dependency "httparty"
   spec.add_dependency "gmail", "~> 0.4.0"
   spec.add_dependency "settingslogic"
+  spec.add_dependency "librato-metrics"
 end

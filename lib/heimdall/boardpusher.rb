@@ -1,19 +1,24 @@
-require 'httparty'
+require 'librato/metrics'
 
 module Heimdall
   class BoardPusher
 
-    DUCKSBOARD_PASSWORD = Settings.ducksboard['password']
-    DUCKSBOARD_API_KEY  = Settings.ducksboard['api_key']
+    LIBRATO_EMAIL   = Settings.librato['email']
+    LIBRATO_API_KEY = Settings.librato['api_key']
 
-    def self.request(address, payload = {}, method = :post)
-      payload = payload.to_json unless payload.empty?
-      result = HTTParty.__send__ method, address, :basic_auth => auth, :body => payload
-      Log.logger.info "#{method} #{payload} to #{address} resulting in #{JSON.parse result.body}"
+    def self.submit(payload = {})
+      authenticate
+      begin
+        result = Librato::Metrics.submit payload
+      rescue => e
+        Log.logger.error "Sending #{payload} resulting in #{e}"
+      ensure
+        Log.logger.info "Sending #{payload} resulting in #{result}"
+      end
     end
 
-    def self.auth
-      { :username => DUCKSBOARD_API_KEY, :password => DUCKSBOARD_PASSWORD }
+    def self.authenticate
+      Librato::Metrics.authenticate LIBRATO_EMAIL, LIBRATO_API_KEY
     end
   end
 end
